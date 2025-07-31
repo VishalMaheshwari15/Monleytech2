@@ -3,9 +3,30 @@ import { motion } from 'framer-motion';
 import { Tilt } from 'react-tilt';
 
 const portfolioItems = [
-  { title: 'E-Commerce Platform', desc: 'Scalable online store with AI-driven recommendations.', img: 'https://via.placeholder.com/400x300?text=Project+1' },
-  { title: 'AI Chatbot', desc: 'Intelligent chatbot for seamless customer support.', img: 'https://via.placeholder.com/400x300?text=Project+2' },
-  { title: 'Web3 Wallet', desc: 'Secure blockchain wallet for crypto transactions.', img: 'https://via.placeholder.com/400x300?text=Project+3' },
+  {
+    title: 'Background Design',
+    desc: 'Custom tech-themed background visuals.',
+    img: '/images/data1.jpg',
+    link: 'https://dawdul99.blogspot.com/2025/03/backraunt-imag.html',
+  },
+  {
+    title: 'Virtual Assistant',
+    desc: 'AI-powered sound-based virtual assistant.',
+    img: '/images/data2.jpg',
+    link: 'https://dawdul99.blogspot.com/2025/02/i-will-be-your-sound-virtual-assistant.html',
+  },
+  {
+    title: 'Data Entry & Web Research',
+    desc: 'Reliable and accurate data management services.',
+    img: '/images/data3.jpg',
+    link: 'https://dawdul99.blogspot.com/2025/02/i-will-do-perfect-data-entry-web.html',
+  },
+  {
+    title: 'YouTube Thumbnail Design',
+    desc: 'Creative thumbnail designs for your YouTube channel.',
+    img: '/images/data4.jpg',
+    link: 'https://dawdul99.blogspot.com/2025/02/thumbnail-design-for-biggest-youtube.html',
+  },
 ];
 
 const sectionVariants = {
@@ -44,7 +65,8 @@ function PortfolioSection() {
               (item) => `{
                 "@type": "CreativeWork",
                 "name": "${item.title}",
-                "description": "${item.desc}"
+                "description": "${item.desc}",
+                "url": "${item.link}"
               }`
             ).join(',')}
           ]
@@ -95,7 +117,9 @@ function PortfolioSection() {
                 {item.desc}
               </p>
               <a
-                href="/contact"
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block text-gray-300 font-medium hover:text-gray-200 transition-colors duration-200"
                 aria-label={`Learn more about ${item.title}`}
               >

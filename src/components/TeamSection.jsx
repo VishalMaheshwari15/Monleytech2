@@ -7,18 +7,18 @@ function TeamSection() {
   const { theme } = useTheme();
   const teamMembers = [
     {
-      name: 'Vishal Rathi ',
+      name: 'Kaushal Tiwari ',
       role: 'Founder & CEO',
       detail: 'As the visionary behind MonkeyTech, I lead with a passion for innovation and strategic growth, steering the company toward cutting-edge solutions since its inception in 2025.',
-      image: '/images/Vishal.png',
-      linkedin: 'https://linkedin.com/in/yourname',
+      image: '/images/Kaushal.jpg',
+      linkedin: 'https://www.linkedin.com/in/kaushal-tiwari-294628227/',
     },
     {
-      name: 'Kaushal Tiwari',
+      name: 'Vishal Rathi',
       role: 'Co-Founder & CTO',
       detail: 'A key architect of MonkeyTech’s technical foundation, I bring fresh expertise in building scalable systems, contributing to our journey since 2025.',
-      image: '/images/Kaushal.jpg',
-      linkedin: 'https://linkedin.com/in/kaushaltiwari',
+      image: '/images/Vishal.png',
+      linkedin: 'www.linkedin.com/in/vishal-rathi-b24904275/',
     },
   ];
 

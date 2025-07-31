@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useDragControls } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaMap, FaStreetView, FaSatellite } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaWhatsapp, FaMap, FaStreetView, FaSatellite } from 'react-icons/fa';
 
 // Contact Info Subcomponent
 const ContactInfo = ({ isMobile }) => {
@@ -26,14 +26,14 @@ const ContactInfo = ({ isMobile }) => {
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`bg-white/80 dark:bg-gray-900/20 backdrop-blur-xl rounded-2xl p-6 lg:p-8 border border-gray-200 dark:border-gray-600/10 hover:border-green-500/40 transition-all duration-300 shadow-2xl ${isMobile ? 'sticky top-16' : ''}`}
-        style={{ '--glow-color': 'rgba(52, 211, 153, 0.3)' }}
+        className={`relative bg-gray-800/30 dark:bg-gray-900/30 backdrop-blur-xl rounded-2xl p-6 lg:p-8 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 shadow-lg ${isMobile ? 'sticky top-16' : ''}`}
       >
-        <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-50 mb-6">Contact Information</h2>
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Contact Information</h2>
         <div className="space-y-4">
           {[
             { icon: FaEnvelope, text: 'monkeyytech05@gmail.com', href: 'mailto:monkeyytech05@gmail.com' },
             { icon: FaPhone, text: '+91 93160 36603', href: 'https://wa.me/919316036603' },
+            { icon: FaPhone, text: '+91 70162 89457', href: 'https://wa.me/917016289457' },
             { icon: FaMapMarkerAlt, text: 'Surat, India' },
           ].map((item, index) => (
             <motion.a
@@ -43,10 +43,9 @@ const ContactInfo = ({ isMobile }) => {
               variants={variants}
               initial="hidden"
               animate="visible"
-              whileHover={{ scale: 1.05, x: 5, '--glow-intensity': '0.5' }}
+              whileHover={{ scale: 1.05, x: 5 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center text-gray-800 dark:text-gray-100 hover:text-green-600 dark:hover:text-green-300 transition-colors duration-200 relative overflow-hidden"
-              style={{ '--glow-intensity': '0' }}
+              className="flex items-center text-gray-800 dark:text-gray-100 hover:text-green-500 dark:hover:text-green-400 transition-colors duration-200 relative overflow-hidden"
             >
               <item.icon className="mr-3 text-xl" />
               <span>{item.text}</span>
@@ -61,13 +60,13 @@ const ContactInfo = ({ isMobile }) => {
           ))}
         </div>
         <div className="mt-8">
-          <h3 className="text-xl font-medium text-gray-900 dark:text-gray-50 mb-4">Follow Us</h3>
+          <h3 className="text-xl font-medium text-gray-900 dark:text-gray-100 mb-4">Follow Us</h3>
           <div className="flex space-x-4">
             {[
               { icon: FaFacebook, href: 'https://facebook.com', color: '#3B5998' },
               { icon: FaTwitter, href: 'https://x.com/MonkeyyTech/', color: '#1DA1F2' },
-              { icon: FaInstagram, href: 'https://instagram.com', color: '#E1306C' },
-              { icon: FaLinkedin, href: 'https://www.linkedin.com/in/monkeyy-tech-a83b2a368/', color: '#0077B5' },
+              { icon: FaInstagram, href: 'https://www.instagram.com/monkeyy.tech?igsh=MTFsZzRuZjd4cTZkMQ==', color: '#E1306C' },
+              { icon: FaWhatsapp, href: 'https://wa.me/919316036603', color: '#25D366' },
             ].map((social, index) => (
               <motion.a
                 key={index}
@@ -78,10 +77,11 @@ const ContactInfo = ({ isMobile }) => {
                 variants={variants}
                 initial="hidden"
                 animate="visible"
-                whileHover={{ scale: 1.3, rotate: 5, '--glow-intensity': '0.5' }}
+                whileHover={{ scale: 1.3, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
                 className="text-gray-800 dark:text-gray-100 hover:text-[var(--social-color)] transition-colors duration-200 relative"
-                style={{ '--social-color': social.color, '--glow-intensity': '0' }}
+                style={{ '--social-color': social.color }}
+                aria-label={`Follow MonkeyTech on ${social.icon.name}`}
               >
                 <social.icon size={24} />
                 <motion.span
@@ -124,7 +124,7 @@ const ContactForm = () => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
-      const message = `Name: ${formData.name}\nMobile: ${formData.mobile}\nMessage: ${formData.message}\nCheck us out on Instagram: https://www.instagram.com/monkeyy.tech/`;
+      const message = `Name: ${formData.name}\nMobile: ${formData.mobile}\nMessage: ${formData.message}\nCheck us out on Instagram: https://www.instagram.com/monkeyy.tech?igsh=MTFsZzRuZjd4cTZkMQ==`;
       const whatsappNumber = '919316036603';
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
@@ -150,10 +150,9 @@ const ContactForm = () => {
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="bg-white/80 dark:bg-gray-900/20 backdrop-blur-xl rounded-2xl p-6 lg:p-8 border border-gray-200 dark:border-gray-600/10 hover:border-green-500/40 transition-all duration-300 shadow-2xl"
-      style={{ '--glow-color': 'rgba(52, 211, 153, 0.3)' }}
+      className="relative bg-gray-800/30 dark:bg-gray-900/30 backdrop-blur-xl rounded-2xl p-6 lg:p-8 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 shadow-lg"
     >
-      <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-50 mb-6">Send Us a Message</h2>
+      <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Send Us a Message</h2>
       <form className="space-y-6" onSubmit={handleSubmit}>
         {[
           { id: 'name', type: 'text', label: 'Name', placeholder: 'Your Name' },
@@ -205,9 +204,9 @@ const ContactForm = () => {
         <motion.button
           type="submit"
           disabled={status === 'loading'}
-          whileHover={{ scale: 1.05, boxShadow: '0 0 15px var(--glow-color)' }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`w-full bg-green-500 dark:bg-green-600 text-white py-3 rounded-lg font-medium transition-colors duration-200 relative overflow-hidden ${status === 'loading' ? 'opacity-70 cursor-not-allowed' : ''}`}
+          className={`w-full bg-gradient-to-r from-green-500 to-teal-400 text-gray-900 dark:text-white py-3 rounded-lg font-medium transition-all duration-200 relative overflow-hidden ${status === 'loading' ? 'opacity-70 cursor-not-allowed' : ''}`}
         >
           <span className="relative z-10">
             {status === 'loading' ? 'Sending...' : status === 'success' ? 'Sent!' : status === 'error' ? 'Error!' : 'Send Message'}
@@ -289,10 +288,14 @@ const MapSection = ({ isMobile }) => {
           if (touchEndX - touchStartX > 50) handleSwipe('right');
         };
       }}
+      role="region"
+      aria-labelledby="map-heading"
     >
-      <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-50 mb-6 text-center">Our Location</h2>
-      <div className="bg-white/80 dark:bg-gray-900/20 backdrop-blur-xl rounded-2xl p-6 border border-gray-200 dark:border-gray-600/10 overflow-hidden shadow-2xl">
-        <div className="flex space-x-2 mb-4">
+      <h2 id="map-heading" className="text-3xl font-semibold text-gray-900 dark:text-gray-100 mb-6 text-center">
+        Our Location
+      </h2>
+      <div className="relative bg-gray-800/30 dark:bg-gray-900/30 backdrop-blur-xl rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 shadow-lg overflow-hidden">
+        <div className="flex flex-wrap gap-2 mb-4">
           {[
             { key: 'map', label: 'Map View', icon: FaMap },
             { key: 'street', label: 'Street View', icon: FaStreetView },
@@ -305,7 +308,7 @@ const MapSection = ({ isMobile }) => {
               whileTap={{ scale: 0.9 }}
               className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
                 view === tab.key
-                  ? 'bg-green-500 text-white'
+                  ? 'bg-gradient-to-r from-green-500 to-teal-400 text-gray-900 dark:text-white'
                   : 'bg-gray-100 dark:bg-gray-800/30 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700/50'
               }`}
               aria-pressed={view === tab.key}
@@ -335,6 +338,7 @@ const MapSection = ({ isMobile }) => {
               aria-hidden="false"
               tabIndex="0"
               className="transition-opacity duration-300"
+              loading="lazy"
             />
           ) : (
             <div className="w-full h-full bg-gray-200/50 dark:bg-gray-700/50 flex items-center justify-center">
@@ -352,16 +356,16 @@ const MapSection = ({ isMobile }) => {
 };
 
 // Floating Orb Component
-const FloatingOrb = () => (
+const FloatingOrb = ({ style }) => (
   <motion.div
-    className="absolute w-16 h-16 bg-gradient-to-br from-green-400 to-cyan-400 rounded-full opacity-20 blur-xl"
+    className="absolute w-6 h-6 bg-gradient-to-br from-green-500 to-teal-400 rounded-full opacity-20 blur-sm"
     animate={{
-      x: [0, 100, -100, 0],
-      y: [0, -50, 50, 0],
-      scale: [1, 1.2, 0.8, 1],
+      x: [0, 40, -40, 0],
+      y: [0, -20, 20, 0],
+      scale: [1, 1.3, 0.7, 1],
     }}
-    transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-    style={{ top: '20%', left: '10%' }}
+    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: Math.random() }}
+    style={style}
   />
 );
 
@@ -377,16 +381,20 @@ function Contact() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-100/50 dark:from-gray-900/50 via-white/50 dark:via-gray-800/50 to-gray-200/50 dark:to-gray-950/50 text-gray-900 dark:text-white font-inter relative overflow-hidden">
+    <main
+      className="min-h-screen bg-gradient-to-br from-gray-100/50 dark:from-gray-900 via-gray-800/50 dark:via-gray-800/50 to-gray-200/50 dark:to-gray-950 text-gray-900 dark:text-gray-100 font-inter relative overflow-hidden snap-y snap-mandatory"
+      role="main"
+      aria-label="MonkeyTech Contact Page"
+    >
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-[url('https://via.placeholder.com/1920x1080?text=Contact+Wave')] bg-cover bg-center opacity-5 dark:opacity-10 animate-pulse-slow pointer-events-none" />
+      <div className="absolute inset-0 particle-bg opacity-5 dark:opacity-10" />
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-cyan-500/10 dark:from-green-500/20 dark:to-cyan-500/20"
+        className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-teal-400/10 dark:from-green-500/20 dark:to-teal-400/20"
         animate={{ opacity: [0.2, 0.4, 0.2] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
       />
-      {Array.from({ length: 3 }).map((_, i) => (
-        <FloatingOrb key={i} />
+      {Array.from({ length: 5 }).map((_, i) => (
+        <FloatingOrb key={i} style={{ top: `${20 + i * 15}%`, left: `${10 + i * 20}%` }} />
       ))}
 
       {/* Header */}
@@ -397,15 +405,17 @@ function Contact() {
         className="text-center py-16 relative z-10"
         style={{ transform: isMobile ? '' : 'translateY(calc(var(--scroll-y) * -0.2))' }}
       >
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 dark:text-gray-50 tracking-wide drop-shadow-2xl">
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 dark:text-gray-100 tracking-tight">
           Get in{' '}
-          <span className="bg-gradient-to-r from-green-400 to-cyan-400 text-transparent bg-clip-text">Touch</span>
+          <span className="bg-gradient-to-r from-green-500 to-teal-400 text-transparent bg-clip-text">
+            Touch
+          </span>
         </h1>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="mt-4 text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto text-gray-700 dark:text-gray-200 leading-relaxed"
+          className="mt-4 text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto text-gray-600 dark:text-gray-200 leading-relaxed"
         >
           We’d love to hear from you! Reach out for collaboration or support.
         </motion.p>
@@ -425,28 +435,20 @@ function Contact() {
       </div>
 
       <style jsx>{`
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.05; }
-          50% { opacity: 0.1; }
+        .particle-bg {
+          background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%2310B981" fill-opacity="0.15" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,133.3C960,139,1056,213,1152,229.3C1248,245,1344,203,1392,181.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,0,320Z"%3E%3C/path%3E%3C/svg%3E')
+            center/cover;
+          animation: waveFlow 30s linear infinite;
         }
-        .animate-pulse-slow {
-          animation: pulse-slow 6s infinite;
+        @keyframes waveFlow {
+          0% { background-position: 0 0; }
+          100% { background-position: 1440px 0; }
         }
         .font-inter {
           font-family: 'Inter', sans-serif;
         }
-        :root {
-          --glow-color: rgba(52, 211, 153, 0.3);
-          --glow-intensity: 0;
-        }
-        .shadow-2xl {
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 0 10px var(--glow-color);
-        }
-        .shadow-2xl:hover {
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 0 20px calc(var(--glow-intensity) * var(--glow-color));
-        }
       `}</style>
-    </div>
+    </main>
   );
 }
 
